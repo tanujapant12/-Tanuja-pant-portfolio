@@ -599,7 +599,7 @@ nav.scrolled{background:rgba(4,8,15,.92);backdrop-filter:blur(20px);border-botto
         </div>
         <div class="fg"><label class="fl-label">Subject</label><input type="text" class="fi" placeholder="Job Opportunity / Freelance Project"/></div>
         <div class="fg"><label class="fl-label">Message</label><textarea class="fi fta" placeholder="Tell me about your project, timeline, and requirements..."></textarea></div>
-        <button class="fsub" onclick="alert('Thanks! Connect a backend to enable real email delivery.')">Send Message →</button>
+         <button class="fsub" id="submit-btn" onclick="submitForm()">Send Message →</button>     
       </div>
     </div>
   </div>
@@ -785,6 +785,38 @@ window.addEventListener('scroll',()=>{
     heroName.style.opacity=1-(y/(window.innerHeight*.7));
   }
 },{passive:true});
+  async function submitForm() {
+  const btn = document.getElementById('submit-btn');
+  const inputs = document.querySelectorAll('.fi');
+  const [name, email, subject, message] = inputs;
+
+  if (!name.value || !email.value || !message.value) {
+    alert('Please fill in all fields.'); return;
+  }
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  const res = await fetch('https://formspree.io/f/xbdzgona', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      name: name.value,
+      email: email.value,
+      subject: subject.value,
+      message: message.value
+    })
+  });
+
+  if (res.ok) {
+    btn.textContent = '✓ Message Sent!';
+    btn.style.background = 'var(--green)';
+    inputs.forEach(i => i.value = '');
+  } else {
+    btn.textContent = 'Failed — Try Again';
+    btn.disabled = false;
+  }
+}
 </script>
 </body>
 </html>
