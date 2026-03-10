@@ -311,6 +311,13 @@ nav.scrolled{background:rgba(4,8,15,.92);backdrop-filter:blur(20px);border-botto
   #cursor,#cursor-ring{display:none;}body{cursor:auto;}
   .hero-row{flex-direction:column;gap:1.8rem;}
 }
+  /* ── CV BUTTON ── */
+.btn-cv{font-family:'JetBrains Mono',monospace;font-size:.67rem;padding:.95rem 2.2rem;background:transparent;color:var(--green);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--green);display:inline-flex;align-items:center;gap:.6rem;position:relative;overflow:hidden;transition:color .3s;}
+.btn-cv::before{content:'';position:absolute;inset:0;background:var(--green);transform:translateX(-101%);transition:transform .35s cubic-bezier(.4,0,.2,1);z-index:-1;}
+.btn-cv:hover{color:var(--bg);}
+.btn-cv:hover::before{transform:translateX(0);}
+.btn-cv-icon{font-size:.8rem;transition:transform .3s;}
+.btn-cv:hover .btn-cv-icon{transform:translateY(3px);}
 </style>
 </head>
 <body>
@@ -357,6 +364,7 @@ nav.scrolled{background:rgba(4,8,15,.92);backdrop-filter:blur(20px);border-botto
   <div class="hero-btns">
     <a href="#projects" class="btn-glow" id="btn1">See My Work</a>
     <a href="#freelance" class="btn-ghost" id="btn2">Hire for a Project</a>
+     <a href="TanujaPant_CV.pdf" download class="btn-cv"><span class="btn-cv-icon">↓</span>Download CV</a>
   </div>
   <div class="scroll-hint"><span class="sline"></span>Scroll to explore</div>
 </section>
